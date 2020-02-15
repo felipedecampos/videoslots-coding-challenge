@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+
+  php:
+    build:
+      context: 'docker/php'
+    user: "${UID}:${GID}"
+    container_name: videoslots-php-fpm
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/conf.d/overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+      - ./docker/logs/php:/var/log/php-fpm
+    expose:
+      - "9000"
+    restart: always
+    networks:
+      app:
+        ipv4_address: ${DOCKER_PHP_IP}
+        aliases:
+          - php
+
+  nginx:
+    image: nginx:alpine
+    container_name: videoslots-nginx
+    working_dir: /var/www
+    ports:
+      - "${DOCKER_NGINX_PORT}:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/logs/nginx:/var/log/nginx
+      - ./:/var/www
+    links:
+      - php
+    depends_on:
+      - php
+    restart: always
+    networks:
+      app:
+        ipv4_address: ${DOCKER_NGINX_IP}
+        aliases:
+          - nginx
+
+networks:
+
+  app:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_NETWORK}
