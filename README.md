@@ -10,7 +10,7 @@ First, you will need to install the application environment with docker-compose
 
 [Go to "How to install the project environment"](https://github.com/felipedecampos/videoslots-coding-challenge#how-to-install-the-project-environment)
 
-Then you will need enter into **videoslots-php-fpm** container to run the command to play the game.
+Then you will need to enter into **videoslots-php-fpm** container to run the command to play the game.
 
 Enter into your **Linux** console and run:
 
@@ -18,7 +18,7 @@ Enter into your **Linux** console and run:
 $ docker exec -it videoslots-php-fpm /bin/bash
 ```
 
-Into the container you can run the command to play the game:
+In the container you can run the command to play the game:
 
 ```shell
 $ php artisan videoslots:game
@@ -37,7 +37,7 @@ Examples:
 ```
 ## ** PHP Standards Recommendations **
 
-To validate the code for consistency with a coding standard go to the **project folder** and run the commands:
+To validate the code for consistency with a coding standard, go to the **project folder** and run the commands:
 
 **PSR-1**
 ```shell
@@ -98,7 +98,7 @@ Then you need to enter into the project folder **videoslots-coding-challenge**:
 $ cd videoslots-coding-challenge
 ```
 
-Now we need to create the **.env** file:
+Now you need to create the **.env** file:
 
 ```shell
 $ cp .env.example .env
@@ -110,7 +110,7 @@ If you are already using the IP or PORT, please, replace for another one.
 
 The next thing you should do is set your application key to a random string. Typically, this string should be 32 characters long. The key can be set in the **.env** file.
 
-After that, lets install the environment with **docker-compose**:
+After that, you will install the environment with **docker-compose**:
 
 **Note: Please, make sure you have docker and docker-compose already installed in your computer**
 
@@ -118,16 +118,8 @@ After that, lets install the environment with **docker-compose**:
 $ docker-compose up -d
 ```
 
-When the containers is already running, you will need to install composer:
+When the containers are already running, you will need to install composer:
 
 ```shell
 $ docker exec videoslots-php-fpm /bin/bash -c "composer install"
-```
-
-Now, you just need to set your host with the IP and hostname of your api:
-
-**Note: Please, make sure if you changed the IP in your .env file you need to change the command bellow to match with your modificaton**
-
-```shell
-$ sudo -- sh -c -e "echo '193.168.111.2\tapi.videoslots.local' >> /etc/hosts";
 ```

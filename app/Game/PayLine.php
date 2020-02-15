@@ -70,8 +70,8 @@ class PayLine
                 return true; // skip iteration
             }
 
-            $symbol = $dupes->keys()->first();
-            $startedAddress = array_search($symbol, $items);
+            $symbol               = $dupes->keys()->first();
+            $startedAddress       = array_search($symbol, $items);
             $payOutStartAddresses = in_array($startedAddress, self::PAYOUTSTARTADDRESSES);
 
             // check if the matched symbols does not start from the PAYOUTSTARTADDRESSES
